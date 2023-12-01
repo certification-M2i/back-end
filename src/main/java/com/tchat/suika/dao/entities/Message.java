@@ -2,8 +2,10 @@ package com.tchat.suika.dao.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name="messages")
@@ -16,7 +18,8 @@ public class Message {
     private String content;
 
     @Column(nullable = false)
-    private LocalDate sendingDate;
+    @CreationTimestamp
+    private LocalDateTime sendingDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
@@ -32,7 +35,7 @@ public class Message {
     public Message() {
     }
 
-    public Message(String content, LocalDate sendingDate, User user, Channel channel) {
+    public Message(String content, LocalDateTime sendingDate, User user, Channel channel) {
         this.content = content;
         this.sendingDate = sendingDate;
         this.user = user;
@@ -55,11 +58,11 @@ public class Message {
         this.content = content;
     }
 
-    public LocalDate getSendingDate() {
+    public LocalDateTime getSendingDate() {
         return sendingDate;
     }
 
-    public void setSendingDate(LocalDate sendingDate) {
+    public void setSendingDate(LocalDateTime sendingDate) {
         this.sendingDate = sendingDate;
     }
 
@@ -89,4 +92,5 @@ public class Message {
                 ", channel=" + channel +
                 '}';
     }
+
 }
