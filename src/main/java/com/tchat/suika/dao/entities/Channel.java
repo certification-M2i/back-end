@@ -1,9 +1,12 @@
 package com.tchat.suika.dao.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +21,8 @@ public class Channel {
     private String name;
 
     @Column(nullable = false, name="date_creation")
-    private LocalDate dateCreation;
+    @CreationTimestamp
+    private LocalDateTime dateCreation;
 
     @ManyToMany
     @JoinTable(name="channel_users",
@@ -30,14 +34,25 @@ public class Channel {
     @OneToMany(mappedBy = "channel", cascade=CascadeType.ALL)
     private List<Message> messages = new ArrayList<>();
 
+    private boolean isDefault;
+
     public Channel() {
     }
 
-    public Channel(String name, LocalDate dateCreation, List<User> users, List<Message> messages) {
+    public Channel(String name, LocalDateTime dateCreation, List<User> users, List<Message> messages, boolean isDefault) {
         this.name = name;
         this.dateCreation = dateCreation;
         this.users = users;
         this.messages = messages;
+        this.isDefault = isDefault;
+    }
+
+    public boolean isDefault() {
+        return isDefault;
+    }
+
+    public void setDefault(boolean aDefault) {
+        isDefault = aDefault;
     }
 
     public Long getId() {
@@ -56,11 +71,11 @@ public class Channel {
         this.name = name;
     }
 
-    public LocalDate getDateCreation() {
+    public LocalDateTime getDateCreation() {
         return dateCreation;
     }
 
-    public void setDateCreation(LocalDate dateCreation) {
+    public void setDateCreation(LocalDateTime dateCreation) {
         this.dateCreation = dateCreation;
     }
 
