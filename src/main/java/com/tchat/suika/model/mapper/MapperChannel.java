@@ -1,7 +1,9 @@
-package com.tchat.suika.model;
+package com.tchat.suika.model.mapper;
 
 import com.tchat.suika.dao.entities.Channel;
 import com.tchat.suika.dao.entities.User;
+import com.tchat.suika.model.dtos.ChannelCreationDTO;
+import com.tchat.suika.model.dtos.GetChannelDTO;
 
 public class MapperChannel {
 

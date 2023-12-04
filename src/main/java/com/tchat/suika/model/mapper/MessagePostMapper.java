@@ -1,6 +1,7 @@
-package com.tchat.suika.model;
+package com.tchat.suika.model.mapper;
 
 import com.tchat.suika.dao.entities.Message;
+import com.tchat.suika.model.dtos.MessagePostDTO;
 
 public class MessagePostMapper {
     public static Message DtoToEntity(MessagePostDTO dto) {

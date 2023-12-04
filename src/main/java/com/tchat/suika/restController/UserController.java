@@ -1,13 +1,12 @@
 package com.tchat.suika.restController;
 
 import com.tchat.suika.dao.entities.User;
-import com.tchat.suika.model.UserDTO;
-import com.tchat.suika.model.UserMapper;
+import com.tchat.suika.model.dtos.UserDTO;
+import com.tchat.suika.model.mapper.UserMapper;
 import com.tchat.suika.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 

@@ -1,11 +1,10 @@
 package com.tchat.suika.restController;
 
 import com.tchat.suika.dao.entities.Channel;
-import com.tchat.suika.dao.entities.Message;
-import com.tchat.suika.model.ChannelCreationDTO;
-import com.tchat.suika.model.GetChannelDTO;
-import com.tchat.suika.model.GetMessagesInChannelDTO;
-import com.tchat.suika.model.UpdateChannelDTO;
+import com.tchat.suika.model.dtos.ChannelCreationDTO;
+import com.tchat.suika.model.dtos.GetChannelDTO;
+import com.tchat.suika.model.dtos.GetMessagesInChannelDTO;
+import com.tchat.suika.model.dtos.UpdateChannelDTO;
 import com.tchat.suika.service.ChannelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
