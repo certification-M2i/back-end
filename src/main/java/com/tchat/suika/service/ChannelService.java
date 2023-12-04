@@ -29,7 +29,6 @@ public class ChannelService {
     @Autowired
     private MessageRepository messageRepository;
 
-
     public ChannelCreationDTO saveChannel(ChannelCreationDTO channelCreationDto) {
         User creator = userRepository.findByUsername(channelCreationDto.getCreatorUsername())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cet utilisateur n'existe pas"));
@@ -55,16 +54,18 @@ public class ChannelService {
         return channelRepository.findChannelsByUserUsername(username);
     }
 
-
     public Channel renameChannel(Long channelId, String newName) {
         Channel channel = channelRepository.findById(channelId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Ce channel n'existe pas"));
+        if(channel.isDefault()){
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Ce channel ne peut être modifié");
+        }
 
         channel.setName(newName);
         return channelRepository.save(channel);
     }
 
-    public void deleteChannel(Long id) {
+    public Long deleteChannel(Long id) {
         Channel channel = channelRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Ce channel n'existe pas"));
         if(channel.isDefault()){
@@ -72,6 +73,45 @@ public class ChannelService {
         }
 
         channelRepository.deleteById(id);
+        return id;
     }
 
+    public String assignUserToChannel(Long channelId, Long userId) {
+        Channel channel = channelRepository.findById(channelId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Ce channel n'existe pas"));
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cet utilisateur n'existe pas"));
+
+        if(channel.getUsers().contains(user)){
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "L'utilisateur est déjà dans ce channel");
+        }
+
+        channel.getUsers().add(user);
+        channelRepository.save(channel);
+        return "Utilisateur affecté";
+    }
+
+    public String removeUserFromChannel(Long channelId, Long userId) {
+        Channel channel = channelRepository.findById(channelId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Ce channel n'existe pas"));
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cet utilisateur n'existe pas"));
+
+        if (channel.getUsers().size() <= 1) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Le channel doit contenir au moins un utilisateur");
+        }
+
+        if (!channel.getUsers().contains(user)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "L'utilisateur n'est pas dans ce channel");
+        }
+        if(channel.isDefault()){
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "l'utilisateur ne peut être supprimé du channel par défaut");
+        }
+
+        channel.getUsers().remove(user);
+        channelRepository.save(channel);
+        return "Utilisateur supprimé du channel";
+    }
 }

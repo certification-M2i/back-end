@@ -1,15 +1,19 @@
 package com.tchat.suika.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class GetMessagesInChannelDTO {
 
     private Long id;
     private String content;
-    private LocalDate sendingDate;
+    @JsonFormat(pattern="dd/MM/yyyy HH:mm")
+    private LocalDateTime sendingDate;
     private String username;
 
-    public GetMessagesInChannelDTO(Long id, String content, LocalDate sendingDate, String username) {
+    public GetMessagesInChannelDTO(Long id, String content, LocalDateTime sendingDate, String username) {
         this.id = id;
         this.content = content;
         this.sendingDate = sendingDate;
@@ -35,11 +39,11 @@ public class GetMessagesInChannelDTO {
         this.content = content;
     }
 
-    public LocalDate getSendingDate() {
+    public LocalDateTime getSendingDate() {
         return sendingDate;
     }
 
-    public void setSendingDate(LocalDate sendingDate) {
+    public void setSendingDate(LocalDateTime sendingDate) {
         this.sendingDate = sendingDate;
     }
 

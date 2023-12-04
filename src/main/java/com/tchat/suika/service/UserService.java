@@ -1,6 +1,8 @@
 package com.tchat.suika.service;
 
+import com.tchat.suika.dao.entities.Channel;
 import com.tchat.suika.dao.entities.User;
+import com.tchat.suika.dao.repositories.ChannelRepository;
 import com.tchat.suika.dao.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +18,12 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    ChannelRepository channelRepository;
+
+    @Autowired
+    ChannelService channelService;
+
     public List<User> getUsers() {
         return userRepository.findAll();
     }
@@ -25,7 +33,10 @@ public class UserService {
     }
 
     public void createUser(User user) {
-        userRepository.save(user);
+        User saveUser = userRepository.save(user);
+        Channel channel = channelRepository.findByName("Général")
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Ce channel n'existe pas"));
+        channelService.assignUserToChannel(channel.getId(), saveUser.getId());
     }
 
     public User updateUser(Long id, String username) {

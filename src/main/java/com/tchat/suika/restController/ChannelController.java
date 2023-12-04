@@ -52,9 +52,20 @@ public class ChannelController {
         return ResponseEntity.ok(updatedChannel.getId());
     }
 
+    @PostMapping("/{channelId}/users/{userId}")
+    public ResponseEntity<String> assignUserInChannel(@PathVariable Long channelId, @PathVariable Long userId){
+        String assignUser = channelService.assignUserToChannel(channelId, userId);
+        return ResponseEntity.ok(assignUser);
+    }
+
+    @DeleteMapping("/{channelId}/users/{userId}")
+    public ResponseEntity<String> removeUserFromChannel(@PathVariable Long channelId, @PathVariable Long userId) {
+        String response = channelService.removeUserFromChannel(channelId, userId);
+        return ResponseEntity.ok(response);
+    }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteChannel(@PathVariable Long id) {
-        channelService.deleteChannel(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public ResponseEntity<Long> deleteChannel(@PathVariable Long id) {
+        return ResponseEntity.ok(channelService.deleteChannel(id));
     }
 }
