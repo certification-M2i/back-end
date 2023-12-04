@@ -1,7 +1,9 @@
 package com.tchat.suika.restController;
 
 import com.tchat.suika.dao.entities.Message;
-import com.tchat.suika.model.*;
+import com.tchat.suika.model.dtos.MessageGetDTO;
+import com.tchat.suika.model.dtos.MessagePostDTO;
+import com.tchat.suika.model.mapper.MessageGetMapper;
 import com.tchat.suika.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;

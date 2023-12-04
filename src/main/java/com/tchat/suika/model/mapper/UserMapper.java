@@ -1,6 +1,7 @@
-package com.tchat.suika.model;
+package com.tchat.suika.model.mapper;
 
 import com.tchat.suika.dao.entities.User;
+import com.tchat.suika.model.dtos.UserDTO;
 
 public class UserMapper {
 
