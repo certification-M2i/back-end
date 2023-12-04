@@ -57,6 +57,9 @@ public class ChannelService {
     public Channel renameChannel(Long channelId, String newName) {
         Channel channel = channelRepository.findById(channelId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Ce channel n'existe pas"));
+        if(channel.isDefault()){
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Ce channel ne peut être modifié");
+        }
 
         channel.setName(newName);
         return channelRepository.save(channel);
@@ -102,6 +105,9 @@ public class ChannelService {
 
         if (!channel.getUsers().contains(user)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "L'utilisateur n'est pas dans ce channel");
+        }
+        if(channel.isDefault()){
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "l'utilisateur ne peut être supprimé du channel par défaut");
         }
 
         channel.getUsers().remove(user);
