@@ -48,10 +48,6 @@ public class MessageController {
             return ResponseEntity.badRequest().body("Un des champs n'a pas été complété");
         }
 
-//        if(messageService.isUserExist(newMessage.getIdUser())){
-//            return ResponseEntity.badRequest().body("L'utilisateur n'existe pas");
-//        }
-
         MessagePostDTO messagePostDTO = messageService.createMessage(newMessage);
         return ResponseEntity.ok(messagePostDTO);
     }
