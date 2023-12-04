@@ -1,18 +1,13 @@
-package com.tchat.suika.dao.restController;
+package com.tchat.suika.restController;
 
 import com.tchat.suika.dao.entities.Message;
-import com.tchat.suika.dao.model.MessageGetDTO;
-import com.tchat.suika.dao.model.MessageGetMapper;
-import com.tchat.suika.dao.model.MessagePostDTO;
-import com.tchat.suika.dao.service.MessageService;
+import com.tchat.suika.model.*;
+import com.tchat.suika.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequestMapping("api")

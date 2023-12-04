@@ -1,4 +1,4 @@
-package com.tchat.suika.dao.model;
+package com.tchat.suika.model;
 
 import com.tchat.suika.dao.entities.Message;
 

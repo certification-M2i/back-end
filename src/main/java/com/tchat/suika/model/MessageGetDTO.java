@@ -1,16 +1,16 @@
-package com.tchat.suika.dao.model;
+package com.tchat.suika.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class MessagePostDTO {
+public class MessageGetDTO {
     private Long id;
     private String content;
+
     @JsonFormat(pattern="dd/MM/yyyy HH:mm")
     private LocalDateTime sendingDate;
-    private Long idUser;
+    private String userName;
     private Long idChannel;
 
     public String getContent() {
@@ -29,13 +29,12 @@ public class MessagePostDTO {
         this.sendingDate = sendingDate;
     }
 
-
-    public Long getIdUser() {
-        return idUser;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setIdUser(Long idUser) {
-        this.idUser = idUser;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public Long getIdChannel() {

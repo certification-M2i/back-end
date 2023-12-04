@@ -1,11 +1,10 @@
-package com.tchat.suika.dao.service;
+package com.tchat.suika.service;
 
 import com.tchat.suika.dao.entities.Channel;
 import com.tchat.suika.dao.entities.Message;
 import com.tchat.suika.dao.entities.User;
-import com.tchat.suika.dao.model.MessageGetDTO;
-import com.tchat.suika.dao.model.MessagePostDTO;
-import com.tchat.suika.dao.model.MessagePostMapper;
+import com.tchat.suika.model.MessagePostDTO;
+import com.tchat.suika.model.MessagePostMapper;
 import com.tchat.suika.dao.repositories.ChannelRepository;
 import com.tchat.suika.dao.repositories.MessageRepository;
 import com.tchat.suika.dao.repositories.UserRepository;
