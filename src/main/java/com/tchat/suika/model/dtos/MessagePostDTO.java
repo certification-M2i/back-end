@@ -1,4 +1,4 @@
-package com.tchat.suika.model;
+package com.tchat.suika.model.dtos;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
