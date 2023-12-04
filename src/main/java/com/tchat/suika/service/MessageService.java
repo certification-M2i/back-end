@@ -54,13 +54,4 @@ public class MessageService {
         }
         return false;
     }
-
-
-//    public boolean isUserExist(Integer id) {
-//        if (userService.findById(id) == null) {
-//            return true;
-//        }
-//        return false;
-//    }
-
 }

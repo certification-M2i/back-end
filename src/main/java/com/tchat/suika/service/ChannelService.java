@@ -29,7 +29,7 @@ public class ChannelService {
     @Autowired
     private MessageRepository messageRepository;
 
-    @Transactional
+
     public ChannelCreationDTO saveChannel(ChannelCreationDTO channelCreationDto) {
         User creator = userRepository.findByUsername(channelCreationDto.getCreatorUsername())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cet utilisateur n'existe pas"));
@@ -55,7 +55,7 @@ public class ChannelService {
         return channelRepository.findChannelsByUserUsername(username);
     }
 
-    @Transactional
+
     public Channel renameChannel(Long channelId, String newName) {
         Channel channel = channelRepository.findById(channelId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Ce channel n'existe pas"));
