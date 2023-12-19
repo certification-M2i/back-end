@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public interface ChannelRepository extends JpaRepository <Channel, Long> {
 
-    @Query("SELECT new com.tchat.suika.model.dtos.GetChannelDTO(c.id, c.name, c.dateCreation) " +
+    @Query("SELECT DISTINCT new com.tchat.suika.model.dtos.GetChannelDTO(c.id, c.name, c.dateCreation) " +
             "FROM Channel c LEFT JOIN c.users u " +
             "WHERE c.isDefault = true OR u.username = :username")
     List<GetChannelDTO> findChannelsByUserUsername(String username);
